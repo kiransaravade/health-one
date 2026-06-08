@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'server/**'
+      - '.github/workflows/docker-ci.yml'
 
 jobs:
   docker-build:
