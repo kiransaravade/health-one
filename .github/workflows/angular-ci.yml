@@ -1,0 +1,31 @@
+name: Angular CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-angular:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: client/health-one-client
+
+    steps:
+
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+
+    - name: Install Packages
+      run: npm ci
+
+    - name: Build Angular
+      run: npm run build
