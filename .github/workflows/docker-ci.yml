@@ -1,4 +1,4 @@
-name: Docker CI
+name: ECS Deploy
 
 on:
   push:
@@ -6,11 +6,9 @@ on:
       - main
     paths:
       - 'server/**'
-      - '.github/workflows/docker-ci.yml'
 
 jobs:
-  docker-build:
-
+  deploy:
     runs-on: ubuntu-latest
 
     defaults:
@@ -18,7 +16,37 @@ jobs:
         working-directory: server/HealthOne.Api
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Build Docker Image
-      run: docker build -t healthone-api .
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build Docker Image
+        run: |
+          docker build -t healthone-api .
+
+      - name: Tag Docker Image
+        run: |
+          docker tag healthone-api:latest \
+          624234316676.dkr.ecr.ap-south-1.amazonaws.com/healthone-api:latest
+
+      - name: Push Docker Image
+        run: |
+          docker push \
+          624234316676.dkr.ecr.ap-south-1.amazonaws.com/healthone-api:latest
+
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service \
+            --cluster healthone-cluster \
+            --service healthone-api-db4d \
+            --force-new-deployment
