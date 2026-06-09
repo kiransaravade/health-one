@@ -1,15 +1,14 @@
 name: ECS Deploy
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'server/**'
-      - '.github/workflows/docker-ci.yml'
+  workflow_run:
+    workflows: ["API CI"]
+    types:
+      - completed
 
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     defaults:
@@ -28,12 +27,10 @@ jobs:
           aws-region: ap-south-1
 
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker Image
-        run: |
-          docker build -t healthone-api .
+        run: docker build -t healthone-api .
 
       - name: Tag Docker Image
         run: |
