@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'server/**'
+      - '.github/workflows/docker-ci.yml'
 
 jobs:
   deploy:
@@ -48,5 +49,5 @@ jobs:
         run: |
           aws ecs update-service \
             --cluster healthone-cluster \
-            --service healthone-api-db4d \
+            --service healthone-api-service \
             --force-new-deployment
