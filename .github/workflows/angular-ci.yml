@@ -48,9 +48,11 @@ jobs:
         run: |
           echo "Distribution ID = '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
       
-      - name: List CloudFront Distributions
+      - name: Show Distributions
         run: |
-          aws cloudfront list-distributions --query "DistributionList.Items[*].[Id,DomainName]" --output table
+          aws cloudfront list-distributions \
+            --query "DistributionList.Items[*].Id" \
+            --output text
 
       - name: Debug CloudFront
         run: |
