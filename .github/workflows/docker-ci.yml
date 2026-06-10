@@ -1,4 +1,4 @@
-name: ECS Deploy
+name: AWS ECS Deploy
 
 on:
   workflow_run:
