@@ -51,6 +51,11 @@ jobs:
       - name: List CloudFront Distributions
         run: |
           aws cloudfront list-distributions --query "DistributionList.Items[*].[Id,DomainName]" --output table
+
+      - name: Debug CloudFront
+        run: |
+          aws cloudfront get-distribution \
+            --id E37370IOO2QDQM
       
       - name: Invalidate CloudFront
         run: |
