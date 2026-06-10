@@ -57,10 +57,10 @@ jobs:
       - name: Debug CloudFront
         run: |
           aws cloudfront get-distribution \
-            --id E37370IOO2QDQM
+            --id E37370I0O2QDQM
       
       - name: Invalidate CloudFront
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id E37370IOO2QDQM \
+            --distribution-id E37370I0O2QDQM \
             --paths "/*"
