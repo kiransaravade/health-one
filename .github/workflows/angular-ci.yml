@@ -1,4 +1,4 @@
-name: Angular Deploy
+name: AWS Angular Deploy
 
 on:
   workflow_dispatch:
