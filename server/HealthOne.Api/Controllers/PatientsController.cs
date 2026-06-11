@@ -14,7 +14,7 @@ public class PatientsController : ControllerBase
             new() { Id = 2, Name = "Mary Jones", Age = 29, Gender = "Female" },
             new() { Id = 3, Name = "David Brown", Age = 42, Gender = "Male" },
             new() { Id = 4, Name = "Kiran Saravade", Age = 21, Gender = "Male" },
-            new() { Id = 4, Name = "Ranjana", Age = 21, Gender = "Female" }
+            new() { Id = 4, Name = "Virat", Age = 21, Gender = "Male" }
         };
 
         return Ok(patients);
