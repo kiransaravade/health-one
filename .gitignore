@@ -1,6 +1,8 @@
 # Angular
 node_modules/
 dist/
+.angular/
+.angular/cache/
 
 # .NET
 bin/
