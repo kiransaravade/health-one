@@ -1,25 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { Patient } from './models/patient';
-import { PatientService } from './services/patient.service';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './app.component.html'
+  imports: [CommonModule, RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-
-  patients: Patient[] = [];
-
-  constructor(private patientService: PatientService) {}
-
-  ngOnInit(): void {
-    this.patientService.getPatients()
-      .subscribe(data => {
-        this.patients = data;
-      });
-  }
+export class AppComponent {
+  title = 'Health One';
 }

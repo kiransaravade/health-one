@@ -1,0 +1,100 @@
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a routerLink="/">
+        <span class="logo-icon">🏥</span>
+        <span class="logo-text">Health One</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <h1>Patient Management</h1>
+      <p>View and manage patient records</p>
+    </div>
+    <a routerLink="/" class="back-button">← Back to Home</a>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-section">
+    <div class="search-box">
+      <input 
+        type="text" 
+        placeholder="Search by patient name or ID..." 
+        [(ngModel)]="searchTerm"
+        class="search-input"
+      />
+      <span class="search-icon">🔍</span>
+    </div>
+    <div class="result-count" *ngIf="!loading">
+      {{ filteredPatients.length }} patient(s) found
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="error-message">
+    <span class="error-icon">⚠️</span>
+    <p>{{ error }}</p>
+    <button (click)="loadPatients()" class="retry-button">Retry</button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading patients...</p>
+  </div>
+
+  <!-- No Results -->
+  <div *ngIf="!loading && !error && filteredPatients.length === 0" class="no-results">
+    <div class="no-results-icon">📋</div>
+    <h3>No patients found</h3>
+    <p *ngIf="searchTerm">Try adjusting your search criteria</p>
+    <p *ngIf="!searchTerm">No patient records available</p>
+  </div>
+
+  <!-- Patients Table -->
+  <div *ngIf="!loading && !error && filteredPatients.length > 0" class="patients-table-container">
+    <table class="patients-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of filteredPatients" class="patient-row">
+          <td class="id-cell">{{ patient.id }}</td>
+          <td class="name-cell">
+            <div class="patient-avatar">
+              {{ patient.name.charAt(0).toUpperCase() }}
+            </div>
+            {{ patient.name }}
+          </td>
+          <td>{{ patient.age }}</td>
+          <td>{{ patient.gender }}</td>
+          <td class="actions-cell">
+            <button class="action-button view-button" title="View Details">👁️</button>
+            <button class="action-button edit-button" title="Edit">✏️</button>
+            <button class="action-button delete-button" title="Delete">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2026 Health One. All rights reserved.</p>
+  </div>
+</footer>

@@ -1,0 +1,87 @@
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <span class="logo-icon">🏥</span>
+      <span class="logo-text">Health One</span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Welcome to Health One</h1>
+    <p class="hero-subtitle">Comprehensive Healthcare Management System</p>
+    <p class="hero-description">
+      Manage patient information, health records, and medical appointments all in one place
+    </p>
+    <a routerLink="/patients" class="cta-button">View Patients</a>
+  </div>
+  <div class="hero-illustration">
+    <div class="medical-icon">🏥</div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<section class="features-section">
+  <div class="features-container">
+    <h2 class="section-title">Our Features</h2>
+    <p class="section-subtitle">Everything you need for healthcare management</p>
+    
+    <div class="features-grid">
+      <div *ngFor="let feature of features" class="feature-card" [class.active]="feature.link !== '#'">
+        <div class="feature-icon">{{ feature.icon }}</div>
+        <h3 class="feature-title">{{ feature.title }}</h3>
+        <p class="feature-description">{{ feature.description }}</p>
+        <a *ngIf="feature.link !== '#'" [routerLink]="feature.link" class="feature-link">
+          Learn More →
+        </a>
+        <span *ngIf="feature.link === '#'" class="coming-soon">Coming Soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-number">1000+</div>
+      <div class="stat-label">Active Patients</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">500+</div>
+      <div class="stat-label">Health Records</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">2000+</div>
+      <div class="stat-label">Appointments</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">99%</div>
+      <div class="stat-label">Uptime</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="cta-container">
+    <h2>Ready to Get Started?</h2>
+    <p>Access your patient management dashboard now</p>
+    <a routerLink="/patients" class="cta-button-secondary">Go to Patient Management</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2026 Health One. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+</footer>
