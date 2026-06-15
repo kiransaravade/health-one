@@ -2,7 +2,7 @@ name: AWS ECS Deploy
 
 on:
   workflow_run:
-    workflows: ["API CI"]
+    workflows: ["API Build CI"]
     types:
       - completed
 
